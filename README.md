@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
 
+* [Angular](https://angular.io/guide/quickstart)
+* [Github GraphQL Guides](https://developer.github.com/v4/guides/)
+* [Github's GraphQL Explorer](https://developer.github.com/v4/explorer/)
+* [Apollo-Angular](https://www.apollographql.com/docs/angular/migration.html)
+* [NG-ZORRO](https://ng.ant.design/docs/introduce/en)
+
+## Demo Screenshot
+
+<img src="README_Images/widescreen.png" height="300">
+<img src="README_Images/mobilescreen.png" height="300">
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
