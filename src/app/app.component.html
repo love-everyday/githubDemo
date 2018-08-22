@@ -1,20 +1,31 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<header class="header">
+  <a routerLink="/" class="logo">
+    <div class="github">
+        <svg height="32" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+    </div>
+    <span>github</span>
+  </a>
+  <div class="menu-button" (click)="showMenuList()"><i class="anticon anticon-{{isShowMenuList ? 'menu-unfold' : 'menu-fold'}}"></i></div>
+  <nz-avatar *ngIf="!isLogin" class="avatar" nzIcon="anticon anticon-user" (click)="login()"></nz-avatar>
+  <nz-dropdown *ngIf="isLogin" class="avatar" [nzPlacement]="'bottomRight'" >
+    <nz-avatar nz-dropdown nzIcon="anticon anticon-user" nzSrc={{userInfo.avatarUrl}} ></nz-avatar>
+    <ul nz-menu >
+      <li nz-menu-item>{{userInfo.login}}</li>
+      <li nz-menu-item (click)="logOut()">Sign Out</li>
+    </ul>
+  </nz-dropdown>
+</header>
+<div *ngIf="isShowMenuList" class="menu-list"><div *ngTemplateOutlet="leftSide"></div></div>
+<div class="left-side"><div *ngTemplateOutlet="leftSide"></div></div>
+<ng-template #leftSide>
+  <div class="left-side-scroll">
+    <ul class="left-side-menu" nz-menu [nzMode]="'inline'">
+      <li *ngFor="let route of routes" [nzSelected]="currentRouter == route.path" nz-menu-item>
+        <a routerLink={{route.path}} (click)="routeClick()"><span title><i class="anticon anticon-{{route.icon}}"></i> {{route.name}}</span></a>
+      </li>
+    </ul>
+  </div>
+</ng-template>
+<div class="main-container">
+  <router-outlet></router-outlet>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-

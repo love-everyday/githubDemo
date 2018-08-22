@@ -23,7 +23,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/theme.less"
             ],
             "scripts": []
           },
@@ -50,7 +51,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "GithubDemo:build"
+            "browserTarget": "GithubDemo:build",
           },
           "configurations": {
             "production": {
@@ -72,7 +73,8 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/theme.less"
             ],
             "scripts": [],
             "assets": [
