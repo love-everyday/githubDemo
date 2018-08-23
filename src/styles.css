@@ -3,3 +3,11 @@
 body {
     margin: 0;
 }
+.container {
+    padding: 0 50px 50px 50px;
+}
+.ant-spin-container {
+    position: relative;
+    zoom: 1;
+    min-height: 340px;
+}

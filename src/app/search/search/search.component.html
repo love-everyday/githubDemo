@@ -1,0 +1,19 @@
+<div class="container">
+    <nz-input-group class="search-input-group" [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+      <input class="search-input" type="text" nz-input (keyup.enter)="search(content)" placeholder="Search" [ngModel]="content" (ngModelChange)="updateContent($event)">
+    </nz-input-group>
+    <ng-template #prefixTemplate><i class="search-icon anticon anticon-search"></i></ng-template>
+    <ng-template #suffixTemplate>
+      <i class="anticon anticon-close-circle" (click)="clear()" *ngIf="content"></i>
+      <span class="search-button" (click)="search()" *ngIf="content">Search</span>
+    </ng-template>
+    <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'">
+      <app-repository-list [dataSource]="data"></app-repository-list>
+    </nz-spin>
+    <div *ngIf="data && data.length > 0" style="position: relative;margin-bottom: 50px;">
+      <div class="pagination">
+          <button [disabled]="!paginationLeft" style="margin-right: 20px;" nz-button nzType="default" nzShape="circle" nzSize="large" (click)="changePage(true)"><i class="anticon anticon-left"></i></button>
+          <button [disabled]="!paginationRight" nz-button nzType="default" nzShape="circle" nzSize="large" (click)="changePage(false)"><i class="anticon anticon-right"></i></button>
+      </div>
+    </div>
+</div>

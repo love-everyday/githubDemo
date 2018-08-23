@@ -4,7 +4,6 @@ import { HttpLink } from "apollo-angular-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { HttpHeaders } from '@angular/common/http';
 import gql from 'graphql-tag';
-import { ApolloError } from '../../../node_modules/apollo-client';
 import { UserService } from './user.service';
 
 @Injectable({
@@ -23,7 +22,7 @@ export class ApolloService {
         uri: 'https://api.github.com/graphql', 
         headers: new HttpHeaders().set('Authorization', `Bearer ${accessToken}`),
       }),
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
     });
     return true;
   }
@@ -51,6 +50,7 @@ export class ApolloService {
     try {
       res = await this.apollo.query({
         query: gql`${query}`,
+        fetchPolicy: 'network-only'  
       }).toPromise();
     } catch (error) {
       const networkError = error.networkError;
@@ -66,7 +66,7 @@ export class ApolloService {
     const res = await this.apolloGraphQLQuery(`{viewer {
       repositories(last: 100, orderBy: {direction: DESC, field: UPDATED_AT}) {
         nodes {
-          name, description,  isFork, updatedAt, pushedAt, url, forkCount,
+          nameWithOwner, description,  isFork, updatedAt, pushedAt, url, forkCount,
           owner {
             login, avatarUrl,url
           },
@@ -89,20 +89,39 @@ export class ApolloService {
   async queryUser() {
     const res = await this.apolloGraphQLQuery('{ viewer { name,avatarUrl,login,email }}');
     return res && res.viewer;
-    // this.checkApolloClient();
-    // let res = null;
-    // try {
-    //   res = await this.apollo.query({
-    //     query: gql`{ viewer { name,avatarUrl,login,email }}`,
-    //   }).toPromise();
-    // } catch (error) {
-    //   const networkError = error.networkError;
-    //   console.log(networkError);
-      
-    //   if (networkError.status == 401) {
-    //     this.userService.logout();
-    //   }
-    // }
-    // return res && res.data && res.data.viewer;
+  }
+
+  async queryRepositoriesInSearch(search: string, cursor: string, type: null | 'previous' | 'next' = null) {
+    let combination = 'first: 10';
+    if (type == 'previous') {
+      combination = `last: 10, before: \"${cursor}\"`;
+    } else if (type == 'next') {
+      combination = `first: 10, after: \"${cursor}\"`;
+    }
+    const res = await this.apolloGraphQLQuery(`{
+      search(${combination}, query: \"${search}\", type: REPOSITORY) {
+        pageInfo {
+          hasNextPage,hasPreviousPage,startCursor,endCursor,
+        },
+        nodes {
+          ... on Repository {
+            nameWithOwner, description,  isFork, updatedAt, pushedAt, url, forkCount,
+            owner {
+              login, avatarUrl,url
+            },
+            parent {
+              url,forkCount,
+              owner {
+                login, avatarUrl,url
+              },
+            },
+            primaryLanguage {
+              color, name,
+            }
+          }
+        }
+      }
+    }`);
+    return res && res.search;
   }
 }

@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   currentRouter = '';
   isShowMenuList = false;
   routes = [
-    {path: '/repository', name: 'Repository', icon: 'home'}
+    {path: '/repository', name: 'Repository', icon: 'home'},
+    {path: '/search', name: 'Search', icon: 'search'},
   ];
   constructor(private apolloService: ApolloService, 
     private userService: UserService, 

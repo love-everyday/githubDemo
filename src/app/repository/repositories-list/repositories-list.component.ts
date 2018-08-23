@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApolloService } from '../../service/apollo.service';
 
 @Component({
@@ -18,12 +18,9 @@ export class RepositoriesListComponent implements OnInit {
   async queryRepositories() {
     this.isSpinning = true;
     const res = await this.apolloService.queryRepositories();
-    console.log(res);
-    
     this.isSpinning = false;
     if (res) {
       this.data = res;
     }
   }
-
 }

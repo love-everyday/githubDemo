@@ -1,0 +1,46 @@
+.anticon-close-circle {
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+    font-size: 12px;
+}
+
+.anticon-close-circle:hover {
+    color: #999;
+}
+
+.anticon-close-circle:active {
+    color: #666;
+}
+.search-input {
+    border: none;
+    box-shadow: none;
+    margin-left: 10px;
+    font-size: 20px;
+    padding-right: 92px !important;
+}
+.search-input-group {
+    border-bottom: 1px solid #ebedee;
+    height: 50px;
+    margin-bottom: 20px;
+}
+.search-icon {
+    margin-left: -10px;
+    font-size: 20px;
+    color: #ccc;
+}
+.search-button {
+    right: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #ccc;
+}
+.search-button:hover {
+    color: #999;
+}
+.pagination {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    transform: translate(-50%, 0);
+}

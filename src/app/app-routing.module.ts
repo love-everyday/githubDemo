@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: './repository/repository.module#RepositoryModule'
   },
   {
+    path: 'search',
+    loadChildren: './search/search.module#SearchModule'
+  },
+  {
     path: '',
     redirectTo: '',
     pathMatch: 'full',
