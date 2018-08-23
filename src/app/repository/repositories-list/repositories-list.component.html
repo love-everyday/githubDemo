@@ -2,13 +2,14 @@
   <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'">
     <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'vertical'">
       <ng-template #item let-item>
-        <nz-list-item [nzActions]=[ownerAction,forkAction,updateAction]>
+        <nz-list-item [nzActions]=[ownerAction,languageAction,forkAction,updateAction]>
           <ng-template #ownerAction>
             <a style="color: rgba(0, 0, 0, 0.45);text-decoration: none;" href="{{item.parent ? item.parent.owner.url : item.owner.url}}"  target="view_window">
               <nz-avatar style="margin-right: 10px;" nz-dropdown nzIcon="anticon anticon-user" nzSrc='{{item.parent ? item.parent.owner.avatarUrl : item.owner.avatarUrl}}'></nz-avatar> 
               {{item.parent ? item.parent.owner.login : item.owner.login}}
             </a>
           </ng-template>
+          <ng-template #languageAction style="display: none;"><div class="language-color" [style.background-color]="item.primaryLanguage ? item.primaryLanguage.color : ''"></div> {{item.primaryLanguage ? item.primaryLanguage.name : 'none'}} </ng-template>
           <ng-template #forkAction><i class="anticon anticon-fork" style="margin-right: 8px;"></i> {{item.parent ? item.parent.forkCount : item.forkCount}} </ng-template>
           <ng-template #updateAction><i class="anticon anticon-bell" style="margin-right: 8px;"></i> {{item.updatedAt.split('T')[0]}}</ng-template>
           <nz-list-item-meta

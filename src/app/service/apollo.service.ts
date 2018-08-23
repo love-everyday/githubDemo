@@ -64,7 +64,7 @@ export class ApolloService {
 
   async queryRepositories() {
     const res = await this.apolloGraphQLQuery(`{viewer {
-      repositories(first: 100) {
+      repositories(last: 100, orderBy: {direction: DESC, field: UPDATED_AT}) {
         nodes {
           name, description,  isFork, updatedAt, pushedAt, url, forkCount,
           owner {
