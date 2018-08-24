@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
 
-The first, we need apply the [OAuth Apps](https://github.com/settings/developers),then set `github_client_id` and `github_secret` in [config.json](/src/config/config.json).
+The first, we need apply the [OAuth Apps](https://github.com/settings/developers),then set `github_client_id` and `github_secret` in  `/src/config/config.json`.
 
 * [Angular](https://angular.io/guide/quickstart)
 * [Github GraphQL Guides](https://developer.github.com/v4/guides/)
