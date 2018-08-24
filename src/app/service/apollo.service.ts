@@ -43,6 +43,8 @@ export class ApolloService {
   }
 
   async apolloGraphQLQuery(query: string) {
+    console.log(query);
+    
     if (!this.checkApolloClient()) {
       return;
     }
@@ -54,9 +56,11 @@ export class ApolloService {
       }).toPromise();
     } catch (error) {
       const networkError = error.networkError;
-      console.log(networkError);
-      if (networkError.status == 401) {
+      if (networkError && networkError.status == 401) {
+        console.log(networkError);
         this.userService.logout();
+      } else {
+        console.log(error);
       }
     }
     return res && res.data;
@@ -94,12 +98,12 @@ export class ApolloService {
   async queryRepositoriesInSearch(search: string, cursor: string, type: null | 'previous' | 'next' = null) {
     let combination = 'first: 10';
     if (type == 'previous') {
-      combination = `last: 10, before: \"${cursor}\"`;
+      combination = `last: 10, before: "${cursor}"`;
     } else if (type == 'next') {
-      combination = `first: 10, after: \"${cursor}\"`;
+      combination = `first: 10, after: "${cursor}"`;
     }
     const res = await this.apolloGraphQLQuery(`{
-      search(${combination}, query: \"${search}\", type: REPOSITORY) {
+      search(${combination}, query: "${search}", type: REPOSITORY) {
         pageInfo {
           hasNextPage,hasPreviousPage,startCursor,endCursor,
         },
@@ -123,5 +127,38 @@ export class ApolloService {
       }
     }`);
     return res && res.search;
+  }
+
+  async queryUserInfo(login: string = null) {
+    let queryType = "viewer";
+    if (login) {
+      queryType = `user(login: "${login}")`
+    }
+    const res = await this.apolloGraphQLQuery(`{
+      ${queryType} {
+        avatarUrl, bioHTML, companyHTML, createdAt,email,location,name,login, url, updatedAt, websiteUrl,
+        pinnedRepositories(first: 6, orderBy: {field: UPDATED_AT, direction: DESC}) {
+          nodes {
+            nameWithOwner, description,  isFork, updatedAt, pushedAt, url, forkCount,
+            owner {
+              login, avatarUrl,url
+            },
+            parent {
+              url,forkCount,
+              owner {
+                login, avatarUrl,url
+              },
+            },
+            primaryLanguage {
+              color, name,
+            }
+          }
+        },
+      }
+    }`);
+    if (login) {
+      return res && res.user;
+    }
+    return res && res.viewer;
   }
 }

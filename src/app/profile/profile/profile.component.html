@@ -1,0 +1,20 @@
+<div class="container">
+  <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'">
+    <div style="width: 100%">
+      <div class="grid">
+        <div class="user">
+          <nz-avatar class="avatar" nzSize="large" nzIcon="anticon anticon-user" [nzSrc]="data ? data.avatarUrl : null"></nz-avatar>
+          <div class="name">{{data && data.name}}</div>
+          <div class="login">{{data && data.login}}</div>
+        </div>
+        <div></div>
+        <div class="user-info-item" *ngFor="let item of infos; let i = index">
+          <i class="anticon anticon-{{item.icon}}"></i>
+          <span target="view_window" [innerHTML]="data && getDataInfo(item.type)"></span>
+        </div>
+      </div>
+      <h3 *ngIf="data">Pinned repositories</h3>
+      <app-repository-list [dataSource]="data ? data.pinnedRepositories.nodes : null"></app-repository-list>
+    </div>
+  </nz-spin>
+</div>

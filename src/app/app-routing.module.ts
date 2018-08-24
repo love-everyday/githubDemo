@@ -5,15 +5,22 @@ import { AuthGuardService } from './service/auth-guard.service';
 const routes: Routes = [
   {
     path: 'repository',
-    loadChildren: './repository/repository.module#RepositoryModule'
+    loadChildren: './repository/repository.module#RepositoryModule',
+    canActivate: [AuthGuardService],
   },
   {
     path: 'search',
-    loadChildren: './search/search.module#SearchModule'
+    loadChildren: './search/search.module#SearchModule',
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'profile',
+    loadChildren: './profile/profile.module#ProfileModule',
+    canActivate: [AuthGuardService],
   },
   {
     path: '',
-    redirectTo: '',
+    redirectTo: '/profile',
     pathMatch: 'full',
     canActivate: [AuthGuardService]
   },

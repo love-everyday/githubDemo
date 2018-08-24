@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   currentRouter = '';
   isShowMenuList = false;
   routes = [
+    {path: '/profile', name: 'Profile', icon: 'profile'},
     {path: '/repository', name: 'Repository', icon: 'home'},
     {path: '/search', name: 'Search', icon: 'search'},
   ];
