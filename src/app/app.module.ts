@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouteReuseStrategy } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -11,6 +12,7 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from "ng-zorro-antd";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppRoutingCache } from "./app-routing.cache";
 
 registerLocaleData(zh);
 
@@ -28,7 +30,7 @@ registerLocaleData(zh);
     BrowserAnimationsModule,
     FormsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }, {provide: RouteReuseStrategy, useClass: AppRoutingCache}],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

@@ -88,6 +88,9 @@
     padding-top: 50px;
 }
 @media (max-width: 700px) {
+    .logo {
+        padding-left: 20px;
+    }
     .left-side {
         display: none;
     }

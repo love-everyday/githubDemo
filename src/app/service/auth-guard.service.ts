@@ -12,7 +12,11 @@ export class AuthGuardService implements CanActivate {
   constructor() { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    this._currentPathSubject.next(state.url);
+    let path = route.routeConfig.path;
+    if (path === 'search/:key') {
+      path = 'search';
+    }
+    this._currentPathSubject.next('/' + path);
     return true;
   }
 

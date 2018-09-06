@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^6.1.0",
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
+    "adm-zip": "^0.4.11",
     "apollo-angular": "^1.1.2",
     "apollo-angular-link-http": "^1.1.1",
     "apollo-cache-inmemory": "^1.2.7",
@@ -31,7 +32,9 @@
     "graphql-tag": "^2.9.2",
     "less": "^2.7.3",
     "ng-zorro-antd": "^1.3.0",
+    "parsejson": "0.0.3",
     "rxjs": "^6.0.0",
+    "webdriver-js-extender": "^2.1.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

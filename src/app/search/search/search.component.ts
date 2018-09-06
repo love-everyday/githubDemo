@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApolloService } from '../../service/apollo.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -16,9 +17,14 @@ export class SearchComponent implements OnInit {
   startCursor = null;
   endCursor = null;
 
-  constructor(private apolloService: ApolloService) { }
+  constructor(private apolloService: ApolloService, private route: ActivatedRoute) { 
+    console.log('Search create');
+    
+  }
 
   ngOnInit() {
+    this.content = this.route.snapshot.paramMap.get('key');
+    this.content && this.search(this.content);
   }
 
   updateContent(value){

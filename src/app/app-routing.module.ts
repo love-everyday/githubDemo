@@ -14,6 +14,11 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'search/:key',
+    loadChildren: './search/search.module#SearchModule',
+    canActivate: [AuthGuardService],
+  },
+  {
     path: 'profile',
     loadChildren: './profile/profile.module#ProfileModule',
     canActivate: [AuthGuardService],
@@ -24,6 +29,11 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [AuthGuardService]
   },
+  {
+    path: '**',
+    redirectTo: '/profile',
+    canActivate: [AuthGuardService]
+  }
 ];
 
 @NgModule({
