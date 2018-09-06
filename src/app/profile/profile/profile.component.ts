@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApolloService } from '../../service/apollo.service';
 import { UserService } from '../../service/user.service';
+import Axios from "axios";
 
 @Component({
   selector: 'app-profile',

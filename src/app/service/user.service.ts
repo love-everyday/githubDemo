@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import Axios from "axios";
 import { BehaviorSubject } from "rxjs";
 
-import * as config from "../../config/config.json";
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -33,21 +33,33 @@ export class UserService {
       return;
     }
     window.sessionStorage.removeItem('state');
-    const body = `client_id=${this.clientId()}&client_secret=${this.clientSecret()}&code=${params['code']}`;
-    let res = await Axios.post("https://github.com/login/oauth/access_token",body);
-    if (res.status !== 200 || !res.data) {
+    const body = {
+      client_id: this.clientId(),
+      client_secret: this.clientSecret(),
+      code: params['code'],
+    }
+    let res = null;
+    try {
+      res = await Axios.post(`${environment.proxyServer}/login/oauth/access_token`,body);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(res);
+    
+    if (!res || res.status != 200 || !res.data || res.data.status != 200 || !res.data.data) {
       return;
     }
-    const responseParams = this.getParamsFromUrl('?' + res.data);
+   
+    const responseParams = this.getParamsFromUrl('?' + res.data.data);
     const accessToken = responseParams['access_token'];
     this.setAccessToken(accessToken);
     this._isLoginSubject.next(true);
   }
   clientId() {
-    return config.github_client_id;
+    return environment.github_client_id;
   }
   clientSecret() {
-    return config.github_secret;
+    return environment.github_client_secret;
   }
 
   getState() {

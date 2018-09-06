@@ -4,6 +4,9 @@
 
 export const environment = {
   production: false,
+  github_client_id: "7034a7e0f4982e890e11",
+  github_client_secret: "80f3a327649240df4d517cd0bd3d7d1d3a2ac0e5",
+  proxyServer: "http://192.168.1.102:7001"
 };
 
 /*

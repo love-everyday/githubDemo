@@ -26,7 +26,6 @@ export class AppComponent implements OnInit {
     private router: Router,
     private authGuardService: AuthGuardService
   ) {
-    
   }
 
   ngOnInit() {
