@@ -29,6 +29,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.body.addEventListener('touchstart', function () { });
+
     const url = window.location.search;
     if (url.indexOf('code') > 0 && url.indexOf('state') > 0) {   
       this.userService.getAccessToken(url);

@@ -34,10 +34,12 @@
     margin: 15px 30px 0 0;
     display: none;
 }
-.menu-button :hover {
+.menu-button:hover {
     color: #1890ff;
 }
-
+.menu-button:active {
+    color: #1890ff;
+}
 .avatar {
     float: right;
     margin: 20px 30px 0 0;
