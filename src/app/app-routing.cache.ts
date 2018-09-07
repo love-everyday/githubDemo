@@ -22,15 +22,15 @@ export class AppRoutingCache implements RouteReuseStrategy {
     return !!AppRoutingCache.handlers[AppRoutingCache.getRouteSnapshotUrl(route)];
   }
   retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle | null {
-    console.log('retrieve');
+    console.log('retrieve', route.routeConfig && route.routeConfig.path);
     if (!route.routeConfig) {
       return null;
     }
-    return AppRoutingCache.handlers[AppRoutingCache.getRouteSnapshotUrl(route)];
+    const path = AppRoutingCache.getRouteSnapshotUrl(route);
+    return AppRoutingCache.handlers[path];
   }
   shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
     console.log('shouldReuseRoute', future, curr);
-    // return future.routeConfig === curr.routeConfig;
     return false;
   }
 }
